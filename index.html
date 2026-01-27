@@ -11,13 +11,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Inter:wght@300;400;600;800&display=swap');
         
-        body { 
-            -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; 
-            font-family: 'Inter', sans-serif; background-color: #fcfaf7; color: #1e293b;
-            width: 100%; margin: 0; padding: 0; overflow-x: hidden;
-        }
-
-        /* --- LUXURY LOADER STYLES --- */
         #luxury-loader {
             position: fixed;
             inset: 0;
@@ -30,17 +23,20 @@
             transition: opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.5s;
             text-align: center;
         }
+
         .loader-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
             animation: luxury-entrance 1s ease-out forwards;
         }
+
         .loader-brand {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 500;
+            font-size: 4rem;
+            font-weight: 900;
             margin-bottom: 0.5rem;
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
@@ -50,6 +46,7 @@
             filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
             line-height: 1;
         }
+
         .loader-sub {
             color: #d4af37;
             font-family: 'Inter', sans-serif;
@@ -60,6 +57,7 @@
             opacity: 0.8;
             margin-left: 0.8em;
         }
+
         .loader-bar-container {
             width: 200px;
             height: 2px;
@@ -69,6 +67,7 @@
             overflow: hidden;
             position: relative;
         }
+
         .loader-bar-progress {
             position: absolute;
             height: 100%;
@@ -76,25 +75,36 @@
             background: #d4af37;
             animation: bar-move 2s infinite ease-in-out;
         }
-        @keyframes bar-move { 0% { left: -50%; } 100% { left: 100%; } }
-        @keyframes luxury-entrance { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .loader-hidden { opacity: 0; visibility: hidden; }
-        /* --- END LUXURY LOADER STYLES --- */
+
+        @keyframes bar-move {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes luxury-entrance {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        body { 
+            -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; 
+            font-family: 'Inter', sans-serif; background-color: #fcfaf7; color: #1e293b;
+            width: 100%; margin: 0; padding: 0;
+        }
         
         .vvip-title { font-family: 'Playfair Display', serif; }
         .glass-light { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); }
         
-        /* 7-DAY COLOR SYSTEM */
-        .day-monday { background-color: #f8fafc !important; border-left: 6px solid #94a3b8; }
-        .day-tuesday { background-color: #f0fdf4 !important; border-left: 6px solid #4ade80; }
-        .day-wednesday { background-color: #eff6ff !important; border-left: 6px solid #60a5fa; }
-        .day-thursday { background-color: #fff7ed !important; border-left: 6px solid #fb923c; }
-        .day-friday { background-color: #fdf2f8 !important; border-left: 6px solid #f472b6; }
-        .day-saturday { background-color: #faf5ff !important; border-left: 6px solid #c084fc; }
-        .day-sunday { background-color: #fefce8 !important; border-left: 6px solid #facc15; }
-
         .poya-day { background: #fff1f2 !important; border-left: 10px solid #e11d48 !important; color: #9f1239; }
+        .high-crowd { background: #fffbeb !important; border-left: 6px solid #d4af37; }
         .abandoned-row { background: #fef2f2 !important; border-left: 10px solid #ef4444 !important; }
+        .football-row { background: #f0fdf4 !important; border-left: 6px solid #22c55e !important; }
+        
         .today-highlight { background: #fef08a !important; border-left: 12px solid #eab308 !important; box-shadow: inset 0 0 25px rgba(234, 179, 8, 0.3); }
         .today-tag { background: #eab308; color: #000; padding: 3px 10px; border-radius: 4px; font-weight: 900; font-size: 10px; margin-bottom: 6px; display: inline-block; letter-spacing: 1px; }
 
@@ -103,13 +113,11 @@
         .ICC-Women { background: #831843; color: white; }
         .Men-T20 { background: #4338ca; color: white; }
         .Women-T20 { background: #065f46; color: white; }
-        .Football { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .Football { background: #15803d; color: white; }
         .abandoned-badge { background: #ef4444; color: white; animation: pulse-attack 2s infinite; }
         
-        .ai-insight-badge { font-size: 8px; padding: 1px 6px; border-radius: 4px; background: #f1f5f9; color: #64748b; font-weight: 800; text-transform: uppercase; display: block; width: fit-content; margin-bottom: 2px; border: 0.5px solid #e2e8f0; }
-
-        .filter-chip { cursor: pointer; transition: all 0.2s; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 10px; font-size: 10px; font-weight: 700; background: white; color: #64748b; }
-        .filter-chip.active { background: #1e293b; color: white; border-color: #1e293b; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        /* New AI Insight Badge */
+        .ai-insight-badge { background: #f8fafc; border: 1px solid #e2e8f0; color: #64748b; font-size: 8px; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-right: 5px; vertical-align: middle; }
 
         .poya-closed-badge {
             background: #e11d48; color: white; padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 900;
@@ -141,37 +149,30 @@
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         select, input { background: #ffffff !important; color: #1e293b !important; border: 1px solid #e2e8f0 !important; transition: all 0.3s; }
+        select[multiple] { height: 100px; padding: 8px !important; }
         
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
         
-        @media (max-width: 1024px) {
-            .loader-brand { font-size: 3rem; }
-        }
         @media (max-width: 640px) {
-            .loader-brand { font-size: 2rem; }
             .vvip-title { font-size: 1.8rem; }
+            .p-4 { padding: 1rem; }
             th, td { padding: 0.75rem !important; font-size: 10px !important; }
+            .loader-brand { font-size: 2.5rem; }
         }
     </style>
     <script>
         document.onkeydown = function(e) {
             if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 67 || e.keyCode == 74)) || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) return false;
         };
-
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById('luxury-loader').classList.add('loader-hidden');
-            }, 3000); 
-        });
     </script>
 </head>
 <body class="p-2 md:p-6 lg:p-10">
 
     <div id="luxury-loader">
         <div class="loader-content">
-            <div class="loader-brand">Leisure Sports Holdings</div>
-            <div class="loader-sub">Annual Events Schedule 2026</div>
+            <h1 class="loader-brand">Leisure Sports Holdings </h1>
+            <p class="loader-sub">Annual Events Schedule 2026</p>
             <div class="loader-bar-container">
                 <div class="loader-bar-progress"></div>
             </div>
@@ -179,6 +180,7 @@
     </div>
 
     <div class="w-full max-w-[1920px] mx-auto">
+        
         <div class="mb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="lg:col-span-1 bg-white border-l-8 border-amber-500 rounded-3xl p-6 shadow-xl flex flex-col justify-center">
                 <p class="text-[10px] uppercase tracking-[0.3em] text-amber-600 font-black mb-1">Sri Lanka </p>
@@ -219,12 +221,12 @@
         </div>
 
         <div class="flex flex-col xl:flex-row justify-between items-start xl:items-end gap-6 mb-8 pb-8 border-b-2 border-slate-100">
-            <div class="w-full xl:w-auto">
+            <div class="w-full xl:w-auto text-center xl:text-left">
                 <h3 class="text-3xl md:text-5xl font-black text-slate-900 vvip-title tracking-tight italic">Annual Events Plan <span class="text-amber-600 not-italic">2026</span></h3>
                 <p class="text-slate-500 text-[10px] md:text-xs tracking-[0.4em] uppercase mt-2 font-bold">LS Sports Events Track</p>
             </div>
             
-            <div class="flex flex-wrap items-center gap-3 w-full xl:w-auto">
+            <div class="flex flex-wrap items-center justify-center xl:justify-end gap-3 w-full xl:w-auto">
                 <div class="glass-light p-3 md:p-4 rounded-2xl text-center min-w-[100px] md:min-w-[140px] shadow-sm">
                     <p class="text-[9px] text-blue-700 font-extrabold uppercase tracking-widest">Events Covered</p>
                     <h2 id="to-date-total" class="text-2xl md:text-3xl font-black text-slate-900">0</h2>
@@ -263,21 +265,19 @@
                     <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">End Date</label>
                     <input type="date" id="f-end-date" onchange="renderMatrix()" class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
                 </div>
-                <div class="xl:col-span-2">
-                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Event Main Title</label>
-                    <div id="multi-cat-container" class="flex flex-wrap gap-2 p-2 bg-white rounded-xl border border-slate-200 min-h-[50px]">
-                        <div class="filter-chip active" data-val="ALL" onclick="toggleCat(this)">All Categories</div>
-                        <div class="filter-chip" data-val="ICC-Men" onclick="toggleCat(this)">ICC-Men</div>
-                        <div class="filter-chip" data-val="ICC-Women" onclick="toggleCat(this)">ICC-Women</div>
-                        <div class="filter-chip" data-val="Men-T20" onclick="toggleCat(this)">Men-T20</div>
-                        <div class="filter-chip" data-val="Women-T20" onclick="toggleCat(this)">Women-T20</div>
-                        <div class="filter-chip" data-val="Football" onclick="toggleCat(this)">Football</div>
-                    </div>
+                <div>
+                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Event Main Title (Multi)</label>
+                    <select id="f-cat" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
+                        <option value="ICC-Men">ICC-Men</option>
+                        <option value="ICC-Women">ICC-Women</option>
+                        <option value="Men-T20">Men-T20</option>
+                        <option value="Women-T20">Women-T20</option>
+                        <option value="Football">Football</option>
+                    </select>
                 </div>
                 <div>
-                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Day Selection</label>
-                    <select id="f-day" onchange="renderMatrix()" class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
-                        <option value="ALL">Full Calendar</option>
+                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Day Selection (Multi)</label>
+                    <select id="f-day" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
                         <option value="Monday">Mondays</option>
                         <option value="Tuesday">Tuesdays</option>
                         <option value="Wednesday">Wednesdays</option>
@@ -288,9 +288,8 @@
                     </select>
                 </div>
                 <div>
-                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Branch Program</label>
-                    <select id="f-prog" onchange="renderMatrix()" class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
-                        <option value="ALL">All Programs</option>
+                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Branch Program (Multi)</label>
+                    <select id="f-prog" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
                         <option value="Open Mic">Open Mic</option>
                         <option value="Just press play">Just press play</option>
                         <option value="quiz night">Quiz Night</option>
@@ -299,11 +298,19 @@
                         <option value="CLOSED">Poya (Closed)</option>
                     </select>
                 </div>
+                <div>
+                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Crowd Alert (Multi)</label>
+                    <select id="f-crowd" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
+                        <option value="HIGH">High Crowd</option>
+                        <option value="NORMAL">Standard Crowd</option>
+                    </select>
+                </div>
             </div>
             <div class="mt-4">
                 <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Search Events</label>
-                <input type="text" id="f-search" onkeyup="renderMatrix()" placeholder="Event name..." class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm">
+                <input type="text" id="f-search" onkeyup="renderMatrix()" placeholder="Meeting name..." class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm">
             </div>
+            <p class="text-[8px] text-slate-400 mt-2 font-bold">* Hold Ctrl (Win) or Command (Mac) to select multiple filters.</p>
         </div>
 
         <div class="bg-white rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl border border-slate-100">
@@ -325,8 +332,15 @@
 
     <script>
         (function() {
+            window.addEventListener('load', function() {
+                setTimeout(() => {
+                    const loader = document.getElementById('luxury-loader');
+                    loader.classList.add('loader-hidden');
+                }, 2000);
+            });
+
             const _0xData = [
-                { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11'},
+              { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11',status: 'abandoned'},
                 { cat: 'ICC-Men', name: 'New Zealand tour of India', start: '2026-01-11', end: '2026-01-31'},
                 { cat: 'ICC-Men', name: 'England tour of Sri Lanka', start: '2026-01-22', end: '2026-02-03'},
                 { cat: 'ICC-Men', name: 'West Indies tour of South Africa', start: '2026-01-27', end: '2026-02-06' },
@@ -359,34 +373,18 @@
                 { cat: 'Football', name: 'Oceania Football Tournament', start: '2026-02-01', end: '2026-02-28' }
             ];
 
+
             const poyas = ["2026-01-03", "2026-02-01", "2026-03-02", "2026-04-01", "2026-05-01", "2026-05-31", "2026-06-29", "2026-07-28", "2026-08-27", "2026-09-25", "2026-10-25", "2026-11-23", "2026-12-23"];
             const branchSpecials = { "Monday": "Open Mic", "Tuesday": "Just press play", "Wednesday": "quiz night", "Thursday": "salsa night", "Friday": "Live entertainment", "Saturday": "live entertainment", "Sunday": "live entertainment" };
-
-            window.toggleCat = function(element) {
-                const value = element.getAttribute('data-val');
-                if (value === 'ALL') {
-                    document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
-                    element.classList.add('active');
-                } else {
-                    document.querySelector('.filter-chip[data-val="ALL"]').classList.remove('active');
-                    element.classList.toggle('active');
-                    if (document.querySelectorAll('.filter-chip.active').length === 0) {
-                        document.querySelector('.filter-chip[data-val="ALL"]').classList.add('active');
-                    }
-                }
-                renderMatrix();
-            };
-
-            function getSelectedCategories() {
-                const active = Array.from(document.querySelectorAll('.filter-chip.active')).map(c => c.getAttribute('data-val'));
-                return active.includes('ALL') ? 'ALL' : active;
-            }
 
             function getSLTimeInfo() {
                 const now = new Date();
                 const slTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Colombo"}));
+                const year = slTime.getFullYear();
+                const month = String(slTime.getMonth() + 1).padStart(2, '0');
+                const day = String(slTime.getDate()).padStart(2, '0');
                 return {
-                    dateString: slTime.toISOString().split('T')[0],
+                    dateString: `${year}-${month}-${day}`,
                     object: slTime,
                     dayName: slTime.toLocaleDateString('en-US', { weekday: 'long' })
                 };
@@ -395,55 +393,102 @@
             function syncTodayDashboard() {
                 const sl = getSLTimeInfo();
                 const isPoya = poyas.includes(sl.dateString);
+                const isHigh = ["Thursday", "Friday", "Saturday", "Sunday"].includes(sl.dayName);
+                
                 document.getElementById('today-date-display').innerText = sl.object.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                 document.getElementById('today-day-display').innerText = sl.dayName;
-                document.getElementById('today-prog-display').innerHTML = isPoya ? '<span class="poya-closed-badge">POYA DAY (CLOSED)</span>' : branchSpecials[sl.dayName];
+                
+                const progDisp = isPoya ? '<span class="poya-closed-badge">POYA DAY (CLOSED)</span>' : branchSpecials[sl.dayName];
+                document.getElementById('today-prog-display').innerHTML = progDisp;
 
                 const todayEvents = _0xData.filter(e => sl.dateString >= e.start && sl.dateString <= e.end);
                 const eventContainer = document.getElementById('today-events-list');
                 if(todayEvents.length > 0) {
-                    eventContainer.innerHTML = todayEvents.map(e => `
-                        <div class="flex flex-col mb-1">
-                            <span class="ai-insight-badge">${e.cat} Insight</span>
-                            <span class="badge ${e.cat}">${e.name}</span>
-                        </div>`).join('');
+                    eventContainer.innerHTML = todayEvents.map(e => {
+                        const statusTag = e.status === 'abandoned' ? '<span class="badge abandoned-badge">ABANDONED</span>' : '';
+                        return `<span class="badge ${e.cat}"><span class="ai-insight-badge">${e.cat}</span>${e.name}</span>${statusTag}`;
+                    }).join('');
                 } else {
                     eventContainer.innerHTML = '<span class="text-slate-500 text-xs italic">No major tournaments scheduled for today.</span>';
                 }
 
-                const isHigh = ["Thursday", "Friday", "Saturday", "Sunday"].includes(sl.dayName);
                 const crowdContainer = document.getElementById('today-crowd-stat');
-                crowdContainer.innerHTML = (isHigh && !isPoya) ? '<p class="text-[9px] uppercase opacity-50 mb-1">Status</p><div class="crowd-attack"><span class="dot-alert"></span> High crowd</div>' : '<p class="text-[9px] uppercase opacity-50 mb-1">Status</p><p class="text-xs font-bold text-slate-400">Normal</p>';
+                if(isHigh && !isPoya) {
+                    crowdContainer.innerHTML = '<p class="text-[9px] uppercase opacity-50 mb-1">Status</p><div class="crowd-attack"><span class="dot-alert"></span> High crowd</div>';
+                } else {
+                    crowdContainer.innerHTML = '<p class="text-[9px] uppercase opacity-50 mb-1">Status</p><p class="text-xs font-bold text-slate-400">Normal</p>';
+                }
             }
 
             function updateCountdown() {
                 const now = new Date().getTime();
-                const futureEvents = _0xData.map(e => ({ ...e, startTime: new Date(e.start).getTime() })).filter(e => e.startTime > now).sort((a, b) => a.startTime - b.startTime);
+                const futureEvents = _0xData
+                    .map(e => ({ ...e, startTime: new Date(e.start).getTime() }))
+                    .filter(e => e.startTime > now && e.status !== 'abandoned')
+                    .sort((a, b) => a.startTime - b.startTime);
+
                 if (futureEvents.length > 0) {
                     const next = futureEvents[0];
                     const diff = next.startTime - now;
+                    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                     document.getElementById('next-event-name').innerText = next.name;
-                    document.getElementById('cd-days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-                    document.getElementById('cd-hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-                    document.getElementById('cd-min').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                    document.getElementById('cd-days').innerText = d.toString().padStart(2, '0');
+                    document.getElementById('cd-hours').innerText = h.toString().padStart(2, '0');
+                    document.getElementById('cd-min').innerText = m.toString().padStart(2, '0');
                 }
             }
 
+            function getSelectValues(select) {
+                var result = [];
+                var options = select && select.options;
+                var opt;
+                for (var i=0, iLen=options.length; i<iLen; i++) {
+                    opt = options[i];
+                    if (opt.selected) {
+                        result.push(opt.value || opt.text);
+                    }
+                }
+                return result;
+            }
+
+            window.filterByMonth = function(monthIdx) {
+                const year = 2026;
+                const firstDay = new Date(year, monthIdx, 1).toISOString().split('T')[0];
+                const lastDay = new Date(year, monthIdx + 1, 0).toISOString().split('T')[0];
+                document.getElementById('f-start-date').value = firstDay;
+                document.getElementById('f-end-date').value = lastDay;
+                renderMatrix();
+            };
+
+            window.resetFilters = function() {
+                document.getElementById('f-start-date').value = '';
+                document.getElementById('f-end-date').value = '';
+                Array.from(document.querySelectorAll('select')).forEach(s => s.selectedIndex = -1);
+                document.getElementById('f-search').value = '';
+                renderMatrix();
+            };
+
             window.renderMatrix = function() {
                 const body = document.getElementById('matrix-body');
-                const fDay = document.getElementById('f-day').value;
-                const fProg = document.getElementById('f-prog').value;
+                const fCats = getSelectValues(document.getElementById('f-cat'));
+                const fDays = getSelectValues(document.getElementById('f-day'));
+                const fProgs = getSelectValues(document.getElementById('f-prog'));
+                const fCrowds = getSelectValues(document.getElementById('f-crowd'));
                 const fSearch = document.getElementById('f-search').value.toLowerCase();
                 const fStart = document.getElementById('f-start-date').value;
                 const fEnd = document.getElementById('f-end-date').value;
-                const selectedCats = getSelectedCategories();
                 
                 body.innerHTML = '';
                 let date = new Date("2026-01-01");
-                const slTodayStr = getSLTimeInfo().dateString;
+                const sl = getSLTimeInfo();
+                const slTodayStr = sl.dateString;
+                const slTodayObj = new Date(slTodayStr);
 
                 let annualCount = 0;
                 let toDateCount = 0;
+                let abandonedCount = 0;
                 let monthlyCounts = new Array(12).fill(0);
 
                 for(let i=0; i<365; i++) {
@@ -454,47 +499,79 @@
                     let isToday = (dStr === slTodayStr);
                     let prog = isPoya ? "CLOSED" : branchSpecials[dayName];
                     
-                    let todayEvents = _0xData.filter(e => (selectedCats === "ALL" || selectedCats.includes(e.cat)) && dStr >= e.start && dStr <= e.end);
+                    let todayEvents = _0xData.filter(e => {
+                        const isInCategory = (fCats.length === 0 || fCats.includes(e.cat));
+                        return isInCategory && dStr >= e.start && dStr <= e.end;
+                    });
 
+                    let hasAbandoned = todayEvents.some(e => e.status === 'abandoned');
+                    let hasFootball = todayEvents.some(e => e.cat === 'Football');
+
+                    let mIdx = date.getMonth();
                     if(todayEvents.length > 0) { 
-                        monthlyCounts[date.getMonth()]++; 
-                        if(dStr <= slTodayStr) toDateCount++;
+                        monthlyCounts[mIdx]++; 
+                        if(date <= slTodayObj) { 
+                            if(hasAbandoned) { abandonedCount++; }
+                            else { toDateCount++; }
+                        }
                     }
 
-                    if (((!fStart || dStr >= fStart) && (!fEnd || dStr <= fEnd)) && (fDay === "ALL" || fDay === dayName) && (fProg === "ALL" || prog.includes(fProg)) && (fSearch === "" || todayEvents.some(e => e.name.toLowerCase().includes(fSearch)))) {
-                        if(todayEvents.length > 0) annualCount++;
-                        let row = document.createElement('tr');
-                        row.className = isToday ? 'today-highlight' : (isPoya ? 'poya-day' : `day-${dayName.toLowerCase()}`);
-                        if(isToday) row.id = "active-today-row";
-                        
-                        row.innerHTML = `
-                            <td class="p-4 md:p-6 text-xs font-bold text-slate-800">
-                                ${isToday ? '<span class="today-tag">TODAY</span><br>' : ''}
-                                ${dStr}<br><span class="opacity-50 uppercase text-[9px] tracking-widest">${dayName}</span>
-                            </td>
-                            <td class="p-4 md:p-6 text-xs font-black uppercase italic text-amber-900">${isPoya ? '<span class="poya-closed-badge">POYA DAY</span>' : branchSpecials[dayName]}</td>
-                            <td class="p-4 md:p-6">${todayEvents.map(e => `<div class="mb-3 last:mb-0"><span class="ai-insight-badge">${e.cat} Insight</span><span class="badge ${e.cat}">${e.name}</span></div>`).join('')}</td>
-                            <td class="p-4 md:p-6">${isHigh && !isPoya ? '<div class="crowd-attack"><span class="dot-alert"></span> High crowd</div>' : ''}</td>
-                        `;
-                        body.appendChild(row);
+                    const withinDateRange = (!fStart || dStr >= fStart) && (!fEnd || dStr <= fEnd);
+                    const withinDayFilter = fDays.length === 0 || fDays.includes(dayName);
+                    const withinProgFilter = fProgs.length === 0 || fProgs.some(p => prog.includes(p));
+                    const withinCrowdFilter = fCrowds.length === 0 || (fCrowds.includes("HIGH") && isHigh) || (fCrowds.includes("NORMAL") && !isHigh);
+
+                    if (withinDateRange && withinDayFilter && withinProgFilter && withinCrowdFilter && (fSearch === "" || todayEvents.some(e => e.name.toLowerCase().includes(fSearch)))) {
+                        if(todayEvents.length > 0) {
+                            annualCount++;
+                            let row = document.createElement('tr');
+                            
+                            let rowStyle = isToday ? 'today-highlight' : (hasAbandoned ? 'abandoned-row' : (hasFootball ? 'football-row' : (isPoya ? 'poya-day' : (isHigh ? 'high-crowd' : ''))));
+                            row.className = rowStyle;
+                            if(isToday) row.id = "active-today-row";
+                            
+                            row.innerHTML = `
+                                <td class="p-4 md:p-6 text-xs font-bold text-slate-800">
+                                    ${isToday ? '<span class="today-tag">TODAY</span><br>' : ''}
+                                    ${dStr}<br><span class="opacity-50 uppercase text-[9px] tracking-widest">${dayName}</span>
+                                </td>
+                                <td class="p-4 md:p-6 text-xs font-black uppercase italic text-amber-900">
+                                    ${isPoya ? '<span class="poya-closed-badge">POYA DAY</span>' : branchSpecials[dayName]}
+                                </td>
+                                <td class="p-4 md:p-6">
+                                    ${todayEvents.map(e => {
+                                        const badgeClass = e.status === 'abandoned' ? 'abandoned-badge' : e.cat;
+                                        const statusText = e.status === 'abandoned' ? ' [NOT HELD]' : '';
+                                        return `<span class="badge ${badgeClass}"><span class="ai-insight-badge">${e.cat}</span>${e.name}${statusText}</span>`;
+                                    }).join('')}
+                                </td>
+                                <td class="p-4 md:p-6">${isHigh && !isPoya && !hasAbandoned ? '<div class="crowd-attack"><span class="dot-alert"></span> High crowd</div>' : ''}</td>
+                            `;
+                            body.appendChild(row);
+                        }
                     }
                     date.setDate(date.getDate() + 1);
                 }
                 
                 document.getElementById('annual-total').innerText = annualCount;
                 document.getElementById('to-date-total').innerText = toDateCount;
+                document.getElementById('abandoned-total').innerText = abandonedCount;
                 
                 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
                 const statContainer = document.getElementById('monthly-stats');
-                statContainer.innerHTML = monthlyCounts.map((val, i) => `
-                    <div class="bg-white p-2 md:p-3 rounded-xl border shadow-sm">
-                        <p class="text-[8px] md:text-[9px] text-amber-700 font-bold mb-1">${months[i]}</p>
-                        <p class="text-sm md:text-lg font-black text-slate-900">${val}</p>
-                    </div>`).join('');
+                statContainer.innerHTML = '';
+                monthlyCounts.forEach((val, i) => { 
+                    statContainer.innerHTML += `
+                        <button onclick="filterByMonth(${i})" class="bg-white p-2 md:p-3 rounded-xl md:rounded-2xl text-center border shadow-sm hover:border-amber-500 transition-all active:scale-90">
+                            <p class="text-[8px] md:text-[9px] text-amber-700 font-bold mb-1">${months[i]}</p>
+                            <p class="text-sm md:text-lg font-black text-slate-900">${val}</p>
+                        </button>`; 
+                });
 
-                if(document.getElementById('active-today-row')) {
-                    setTimeout(() => document.getElementById('active-today-row').scrollIntoView({ behavior: 'smooth', block: 'center' }), 1000);
-                }
+                setTimeout(() => {
+                    const tr = document.getElementById('active-today-row');
+                    if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 1000);
             };
 
             window.exportExcel = function() {
@@ -505,8 +582,8 @@
             };
 
             window.exportTXT = function() {
-                let content = "YEARLY SCHEDULE 2026\n\n";
-                _0xData.forEach(e => content += `${e.start} to ${e.end}: ${e.name} (${e.cat})\n`);
+                let content = "YEARLY SCHEDULE OF EVENTS 2026\n==============================\n\n";
+                _0xData.forEach(e => content += `${e.start} to ${e.end}: ${e.name} (${e.cat}) ${e.status ? '['+e.status.toUpperCase()+']' : ''}\n`);
                 const blob = new Blob([content], { type: "text/plain" });
                 const link = document.createElement("a");
                 link.href = URL.createObjectURL(blob);
@@ -517,14 +594,26 @@
             window.exportPDF = function() {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF('p', 'pt', 'a4');
-                doc.text("Yearly Schedule 2026", 40, 40);
-                doc.autoTable({ head: [['Start', 'End', 'Event', 'Category']], body: _0xData.map(e => [e.start, e.end, e.name, e.cat]), startY: 60 });
+                doc.text("Yearly Schedule of Events 2026", 40, 40);
+                const tableData = _0xData.map(e => [e.start, e.end, e.name, e.cat, e.status || 'Active']);
+                doc.autoTable({
+                    head: [['Start Date', 'End Date', 'Event Name', 'Category', 'Status']],
+                    body: tableData,
+                    startY: 60,
+                    theme: 'grid',
+                    headStyles: { fillStyle: '#d4af37' }
+                });
                 doc.save("Schedule_2026.pdf");
             };
 
             syncTodayDashboard();
             updateCountdown();
             renderMatrix();
+            
+            setInterval(() => { 
+                syncTodayDashboard(); 
+                renderMatrix(); 
+            }, 3600000);
         })();
     </script>
 </body>
