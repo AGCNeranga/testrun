@@ -16,6 +16,68 @@
             font-family: 'Inter', sans-serif; background-color: #fcfaf7; color: #1e293b;
             width: 100%; margin: 0; padding: 0;
         }
+
+        /* --- LUXURY ENTRANCE STYLES --- */
+        #luxury-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out, visibility 1s;
+        }
+        .loader-content {
+            text-align: center;
+            animation: fadeIn 1.5s ease-out;
+        }
+        .loader-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #d4af37;
+            letter-spacing: 0.1em;
+            font-style: italic;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .loader-bar {
+            width: 150px;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.2);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .loader-bar::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #d4af37;
+            animation: load 2s infinite;
+        }
+        @keyframes load {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        /* --- END LUXURY ENTRANCE STYLES --- */
         
         .vvip-title { font-family: 'Playfair Display', serif; }
         .glass-light { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); }
@@ -94,9 +156,24 @@
         document.onkeydown = function(e) {
             if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 67 || e.keyCode == 74)) || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) return false;
         };
+
+        // Loader control
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('luxury-loader').classList.add('loader-hidden');
+            }, 2000); // 2 second display for effect
+        });
     </script>
 </head>
 <body class="p-2 md:p-6 lg:p-10">
+
+    <div id="luxury-loader">
+        <div class="loader-content">
+            <div class="loader-logo">LS SPORTS</div>
+            <p class="text-[10px] uppercase tracking-[0.5em] text-amber-500/60 font-bold mb-4">2026 Executive Schedule</p>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
 
     <div class="w-full max-w-[1920px] mx-auto">
         
