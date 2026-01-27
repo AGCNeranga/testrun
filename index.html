@@ -11,73 +11,93 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Inter:wght@300;400;600;800&display=swap');
         
+        /* --- LUXURY LOADER STYLES --- */
+        #luxury-loader {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #0a2d1d 0%, #000000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1), visibility 1.5s;
+            text-align: center;
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: luxury-entrance 1s ease-out forwards;
+        }
+
+        .loader-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: -3px;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+            line-height: 1;
+        }
+
+        .loader-sub {
+            color: #d4af37;
+            font-family: 'Inter', sans-serif;
+            font-size: 8px;
+            letter-spacing: 0.8em;
+            text-transform: uppercase;
+            font-weight: 800;
+            opacity: 0.8;
+            margin-left: 0.8em; /* Offsets letter-spacing for perfect center */
+        }
+
+        .loader-bar-container {
+            width: 200px;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.1);
+            margin-top: 2.5rem;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-bar-progress {
+            position: absolute;
+            height: 100%;
+            width: 50%;
+            background: #d4af37;
+            animation: bar-move 2s infinite ease-in-out;
+        }
+
+        @keyframes bar-move {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes luxury-entrance {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        /* --- END LUXURY LOADER STYLES --- */
+
         body { 
             -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; 
             font-family: 'Inter', sans-serif; background-color: #fcfaf7; color: #1e293b;
             width: 100%; margin: 0; padding: 0;
         }
-
-        /* --- LUXURY ENTRANCE STYLES --- */
-        #luxury-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 1s ease-in-out, visibility 1s;
-        }
-        .loader-content {
-            text-align: center;
-            animation: fadeIn 1.5s ease-out;
-        }
-        .loader-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: #d4af37;
-            letter-spacing: 0.1em;
-            font-style: italic;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .loader-bar {
-            width: 150px;
-            height: 2px;
-            background: rgba(212, 175, 55, 0.2);
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-        }
-        .loader-bar::after {
-            content: '';
-            position: absolute;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: #d4af37;
-            animation: load 2s infinite;
-        }
-        @keyframes load {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .loader-hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        /* --- END LUXURY ENTRANCE STYLES --- */
         
         .vvip-title { font-family: 'Playfair Display', serif; }
         .glass-light { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); }
@@ -97,19 +117,8 @@
         .ICC-Women { background: #831843; color: white; }
         .Men-T20 { background: #4338ca; color: white; }
         .Women-T20 { background: #065f46; color: white; }
-        
-        /* New Football Styling (Light Green) */
-        .Football { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
-        
         .abandoned-badge { background: #ef4444; color: white; animation: pulse-attack 2s infinite; }
         
-        /* AI Insight Badge (Small) */
-        .ai-insight-badge { font-size: 8px; padding: 1px 6px; border-radius: 4px; background: #f1f5f9; color: #64748b; font-weight: 800; text-transform: uppercase; display: block; width: fit-content; margin-bottom: 2px; border: 0.5px solid #e2e8f0; }
-
-        /* Multi-select filter chips */
-        .filter-chip { cursor: pointer; transition: all 0.2s; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 10px; font-size: 10px; font-weight: 700; background: white; color: #64748b; }
-        .filter-chip.active { background: #1e293b; color: white; border-color: #1e293b; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-
         /* Poya Closed Badge */
         .poya-closed-badge {
             background: #e11d48; color: white; padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 900;
@@ -150,28 +159,24 @@
             .vvip-title { font-size: 1.8rem; }
             .p-4 { padding: 1rem; }
             th, td { padding: 0.75rem !important; font-size: 10px !important; }
+            .loader-brand { font-size: 2.5rem; }
         }
     </style>
     <script>
         document.onkeydown = function(e) {
             if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 67 || e.keyCode == 74)) || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) return false;
         };
-
-        // Loader control
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById('luxury-loader').classList.add('loader-hidden');
-            }, 2000); // 2 second display for effect
-        });
     </script>
 </head>
 <body class="p-2 md:p-6 lg:p-10">
 
     <div id="luxury-loader">
         <div class="loader-content">
-            <div class="loader-logo">Leisure Sports Holdings</div>
-            <p class="text-[10px] uppercase tracking-[0.5em] text-amber-500/60 font-bold mb-4">Annual Events Schedule 2026</p>
-            <div class="loader-bar"></div>
+            <h2 class="loader-brand">Leisure Sports Holdings </h2>
+            <p class="loader-sub">Annual Events Schedule 2026</p>
+            <div class="loader-bar-container">
+                <div class="loader-bar-progress"></div>
+            </div>
         </div>
     </div>
 
@@ -219,12 +224,12 @@
         </div>
 
         <div class="flex flex-col xl:flex-row justify-between items-start xl:items-end gap-6 mb-8 pb-8 border-b-2 border-slate-100">
-            <div class="w-full xl:w-auto">
+            <div class="w-full xl:w-auto text-center xl:text-left">
                 <h3 class="text-3xl md:text-5xl font-black text-slate-900 vvip-title tracking-tight italic">Annual Events Plan <span class="text-amber-600 not-italic">2026</span></h3>
                 <p class="text-slate-500 text-[10px] md:text-xs tracking-[0.4em] uppercase mt-2 font-bold">LS Sports Events Track</p>
             </div>
             
-            <div class="flex flex-wrap items-center gap-3 w-full xl:w-auto">
+            <div class="flex flex-wrap items-center justify-center xl:justify-end gap-3 w-full xl:w-auto">
                 <div class="glass-light p-3 md:p-4 rounded-2xl text-center min-w-[100px] md:min-w-[140px] shadow-sm">
                     <p class="text-[9px] text-blue-700 font-extrabold uppercase tracking-widest">Events Covered</p>
                     <h2 id="to-date-total" class="text-2xl md:text-3xl font-black text-slate-900">0</h2>
@@ -263,16 +268,17 @@
                     <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">End Date</label>
                     <input type="date" id="f-end-date" onchange="renderMatrix()" class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
                 </div>
-                <div class="xl:col-span-2">
-                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Event Main Title (Select Multiple)</label>
-                    <div id="multi-cat-container" class="flex flex-wrap gap-2 p-2 bg-white rounded-xl border border-slate-200 min-h-[50px]">
-                        <div class="filter-chip active" data-val="ALL" onclick="toggleCat(this)">All Categories</div>
-                        <div class="filter-chip" data-val="ICC-Men" onclick="toggleCat(this)">ICC-Men</div>
-                        <div class="filter-chip" data-val="ICC-Women" onclick="toggleCat(this)">ICC-Women</div>
-                        <div class="filter-chip" data-val="Men-T20" onclick="toggleCat(this)">Men-T20</div>
-                        <div class="filter-chip" data-val="Women-T20" onclick="toggleCat(this)">Women-T20</div>
-                        <div class="filter-chip" data-val="Football" onclick="toggleCat(this)">Football</div>
-                    </div>
+                <div>
+                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Event Main Title</label>
+                    <select id="f-cat" onchange="renderMatrix()" class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
+                        <option value="ALL">All Categories</option>
+                        <option value="ICC-Men">ICC-Men</option>
+                        <option value="ICC-Women">ICC-Women</option>
+                        <option value="Men-T20">Men-T20</option>
+                        <option value="Women-T20">Women-T20</option>
+                        <option value="Football">Football</option>
+
+                    </select>
                 </div>
                 <div>
                     <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Day Selection</label>
@@ -333,8 +339,16 @@
 
     <script>
         (function() {
+            // Loader fade out logic
+            window.addEventListener('load', function() {
+                setTimeout(() => {
+                    const loader = document.getElementById('luxury-loader');
+                    loader.classList.add('loader-hidden');
+                }, 2000); // 2 second display for luxury feel
+            });
+
             const _0xData = [
-               { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11'},
+                { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11'},
                 { cat: 'ICC-Men', name: 'New Zealand tour of India', start: '2026-01-11', end: '2026-01-31'},
                 { cat: 'ICC-Men', name: 'England tour of Sri Lanka', start: '2026-01-22', end: '2026-02-03'},
                 { cat: 'ICC-Men', name: 'West Indies tour of South Africa', start: '2026-01-27', end: '2026-02-06' },
@@ -363,34 +377,12 @@
                 { cat: 'Men-T20', name: 'England Men Hundred', start: '2026-08-01', end: '2026-08-31' },
                 { cat: 'Women-T20', name: 'India IPL (W)', start: '2026-01-09', end: '2026-02-05' },
                 { cat: 'Women-T20', name: 'England Women Hundred', start: '2026-08-01', end: '2026-08-31' },
-                { cat: 'Football', name: 'World Cup Qualifiers Showcase', start: '2026-08-01', end: '2026-08-31' },
-                { cat: 'Football', name: 'Oceania Football Tournament', start: '2026-02-01', end: '2026-02-28' }
+                { cat: 'Football', name: 'England Women Hundred', start: '2026-08-01', end: '2026-08-31' },
+                { cat: 'Football', name: 'New Zealand', start: '2026-02-01', end: '2026-02-31' }
             ];
 
             const poyas = ["2026-01-03", "2026-02-01", "2026-03-02", "2026-04-01", "2026-05-01", "2026-05-31", "2026-06-29", "2026-07-28", "2026-08-27", "2026-09-25", "2026-10-25", "2026-11-23", "2026-12-23"];
             const branchSpecials = { "Monday": "Open Mic", "Tuesday": "Just press play", "Wednesday": "quiz night", "Thursday": "salsa night", "Friday": "Live entertainment", "Saturday": "live entertainment", "Sunday": "live entertainment" };
-
-            // Logic for Multi-Select Filters
-            window.toggleCat = function(element) {
-                const value = element.getAttribute('data-val');
-                if (value === 'ALL') {
-                    document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
-                    element.classList.add('active');
-                } else {
-                    document.querySelector('.filter-chip[data-val="ALL"]').classList.remove('active');
-                    element.classList.toggle('active');
-                    const activeChips = document.querySelectorAll('.filter-chip.active');
-                    if (activeChips.length === 0) {
-                        document.querySelector('.filter-chip[data-val="ALL"]').classList.add('active');
-                    }
-                }
-                renderMatrix();
-            };
-
-            function getSelectedCategories() {
-                const active = Array.from(document.querySelectorAll('.filter-chip.active')).map(c => c.getAttribute('data-val'));
-                return active.includes('ALL') ? 'ALL' : active;
-            }
 
             function getSLTimeInfo() {
                 const now = new Date();
@@ -467,8 +459,7 @@
             window.resetFilters = function() {
                 document.getElementById('f-start-date').value = '';
                 document.getElementById('f-end-date').value = '';
-                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-                document.querySelector('.filter-chip[data-val="ALL"]').classList.add('active');
+                document.getElementById('f-cat').value = 'ALL';
                 document.getElementById('f-day').value = 'ALL';
                 document.getElementById('f-prog').value = 'ALL';
                 document.getElementById('f-crowd').value = 'ALL';
@@ -484,7 +475,7 @@
                 const fCrowd = document.getElementById('f-crowd').value;
                 const fStart = document.getElementById('f-start-date').value;
                 const fEnd = document.getElementById('f-end-date').value;
-                const selectedCats = getSelectedCategories();
+                const fCat = document.getElementById('f-cat').value;
                 
                 body.innerHTML = '';
                 let date = new Date("2026-01-01");
@@ -506,11 +497,13 @@
                     let prog = isPoya ? "CLOSED" : branchSpecials[dayName];
                     
                     let todayEvents = _0xData.filter(e => {
-                        const isInCategory = (selectedCats === "ALL" || selectedCats.includes(e.cat));
+                        const isInCategory = (fCat === "ALL" || e.cat === fCat);
                         return isInCategory && dStr >= e.start && dStr <= e.end;
                     });
 
                     let hasAbandoned = todayEvents.some(e => e.status === 'abandoned');
+                    let activeEventsOnly = todayEvents.filter(e => e.status !== 'abandoned');
+
                     let mIdx = date.getMonth();
                     if(todayEvents.length > 0) { 
                         monthlyCounts[mIdx]++; 
@@ -542,11 +535,7 @@
                                 ${todayEvents.map(e => {
                                     const badgeClass = e.status === 'abandoned' ? 'abandoned-badge' : e.cat;
                                     const statusText = e.status === 'abandoned' ? ' [NOT HELD]' : '';
-                                    return `
-                                        <div class="mb-3 last:mb-0">
-                                            <span class="ai-insight-badge">${e.cat} Insight</span>
-                                            <span class="badge ${badgeClass}">${e.name}${statusText}</span>
-                                        </div>`;
+                                    return `<span class="badge ${badgeClass}">${e.name}${statusText}</span>`;
                                 }).join('')}
                             </td>
                             <td class="p-4 md:p-6">${isHigh && !isPoya && !hasAbandoned ? '<div class="crowd-attack"><span class="dot-alert"></span> High crowd</div>' : ''}</td>
@@ -621,4 +610,3 @@
     </script>
 </body>
 </html>
-
