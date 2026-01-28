@@ -50,7 +50,7 @@
         .loader-sub {
             color: #d4af37;
             font-family: 'Inter', sans-serif;
-            font-size: 10px;
+            font-size: 8px;
             letter-spacing: 0.8em;
             text-transform: uppercase;
             font-weight: 800;
@@ -148,8 +148,39 @@
         .dot-alert { height: 8px; width: 8px; background-color: #b45309; border-radius: 50%; display: inline-block; animation: blink 0.8s infinite; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
+        /* Modern Attack Multi-Select Styling */
         select, input { background: #ffffff !important; color: #1e293b !important; border: 1px solid #e2e8f0 !important; transition: all 0.3s; }
-        select[multiple] { height: 100px; padding: 8px !important; }
+        
+        select[multiple] { 
+            height: 120px; 
+            padding: 5px !important; 
+            border-radius: 15px !important;
+            outline: none;
+            border: 2px solid #f1f5f9 !important;
+            -webkit-appearance: none; /* Fix for iOS default styling */
+        }
+
+        select[multiple] option {
+            padding: 8px 12px;
+            margin: 3px 0;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+
+        select[multiple] option:checked {
+            background: #fffbeb linear-gradient(0deg, #fffbeb 0%, #fffbeb 100%) !important;
+            color: #b45309 !important;
+            border-left: 4px solid #d4af37;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-weight: 800;
+        }
+
+        select[multiple] option:hover {
+            background-color: #f8fafc;
+        }
         
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
@@ -171,7 +202,7 @@
 
     <div id="luxury-loader">
         <div class="loader-content">
-            <h1 class="loader-brand">Leisure Sports Holdings </h1>
+            <h3 class="loader-brand">Leisure Sports Holdings </h3>
             <p class="loader-sub">Annual Events Schedule 2026</p>
             <div class="loader-bar-container">
                 <div class="loader-bar-progress"></div>
@@ -223,7 +254,7 @@
         <div class="flex flex-col xl:flex-row justify-between items-start xl:items-end gap-6 mb-8 pb-8 border-b-2 border-slate-100">
             <div class="w-full xl:w-auto text-center xl:text-left">
                 <h3 class="text-3xl md:text-5xl font-black text-slate-900 vvip-title tracking-tight italic">Annual Events Plan <span class="text-amber-600 not-italic">2026</span></h3>
-                <p class="text-slate-500 text-[10px] md:text-xs tracking-[0.4em] uppercase mt-2 font-bold">LS Sports Events Track</p>
+                <p class="text-slate-500 text-[10px] md:text-xs tracking-[0.4em] uppercase mt-2 font-bold">Leisure Sports Events Track</p>
             </div>
             
             <div class="flex flex-wrap items-center justify-center xl:justify-end gap-3 w-full xl:w-auto">
@@ -278,13 +309,13 @@
                 <div>
                     <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Day Selection (Multi)</label>
                     <select id="f-day" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
-                        <option value="Monday">Mondays</option>
-                        <option value="Tuesday">Tuesdays</option>
-                        <option value="Wednesday">Wednesdays</option>
-                        <option value="Thursday">Thursdays</option>
-                        <option value="Friday">Fridays</option>
-                        <option value="Saturday">Saturdays</option>
-                        <option value="Sunday">Sundays</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
                     </select>
                 </div>
                 <div>
@@ -310,7 +341,7 @@
                 <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Search Events</label>
                 <input type="text" id="f-search" onkeyup="renderMatrix()" placeholder="Meeting name..." class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm">
             </div>
-            <p class="text-[8px] text-slate-400 mt-2 font-bold">* Hold Ctrl (Win) or Command (Mac) to select multiple filters.</p>
+            <p class="text-[8px] text-slate-400 mt-2 font-bold">* Quick Selection: Click items to toggle on/off instantly.</p>
         </div>
 
         <div class="bg-white rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl border border-slate-100">
@@ -337,10 +368,29 @@
                     const loader = document.getElementById('luxury-loader');
                     loader.classList.add('loader-hidden');
                 }, 2000);
+
+                // FIXED: Enhanced Multi-Select for Mobile and Desktop
+                const multiSelects = document.querySelectorAll('select[multiple]');
+                multiSelects.forEach(select => {
+                    const handleSelection = function(e) {
+                        e.preventDefault();
+                        const option = e.target;
+                        if (option.tagName === 'OPTION') {
+                            option.selected = !option.selected;
+                            // Trigger the change event manually to update matrix
+                            const event = new Event('change', { bubbles: true });
+                            select.dispatchEvent(event);
+                        }
+                    };
+
+                    // Add both mouse and touch support
+                    select.addEventListener('mousedown', handleSelection);
+                    select.addEventListener('touchstart', handleSelection, { passive: false });
+                });
             });
 
             const _0xData = [
-              { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11',status: 'abandoned'},
+                 { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11'},
                 { cat: 'ICC-Men', name: 'New Zealand tour of India', start: '2026-01-11', end: '2026-01-31'},
                 { cat: 'ICC-Men', name: 'England tour of Sri Lanka', start: '2026-01-22', end: '2026-02-03'},
                 { cat: 'ICC-Men', name: 'West Indies tour of South Africa', start: '2026-01-27', end: '2026-02-06' },
@@ -372,7 +422,6 @@
                 { cat: 'Football', name: 'World Cup Qualifiers Showcase', start: '2026-08-01', end: '2026-08-31' },
                 { cat: 'Football', name: 'Oceania Football Tournament', start: '2026-02-01', end: '2026-02-28' }
             ];
-
 
             const poyas = ["2026-01-03", "2026-02-01", "2026-03-02", "2026-04-01", "2026-05-01", "2026-05-31", "2026-06-29", "2026-07-28", "2026-08-27", "2026-09-25", "2026-10-25", "2026-11-23", "2026-12-23"];
             const branchSpecials = { "Monday": "Open Mic", "Tuesday": "Just press play", "Wednesday": "quiz night", "Thursday": "salsa night", "Friday": "Live entertainment", "Saturday": "live entertainment", "Sunday": "live entertainment" };
