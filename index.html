@@ -105,10 +105,23 @@
         .abandoned-row { background: #fef2f2 !important; border-left: 10px solid #ef4444 !important; }
         .football-row { background: #f0fdf4 !important; border-left: 6px solid #22c55e !important; }
         
+        /* Interactive Scrollytelling & Row Motion */
+        tbody tr { transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+        tbody tr:hover { transform: scale(1.005) translateX(5px); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); z-index: 10; position: relative; }
+
         .today-highlight { background: #fef08a !important; border-left: 12px solid #eab308 !important; box-shadow: inset 0 0 25px rgba(234, 179, 8, 0.3); }
         .today-tag { background: #eab308; color: #000; padding: 3px 10px; border-radius: 4px; font-weight: 900; font-size: 10px; margin-bottom: 6px; display: inline-block; letter-spacing: 1px; }
 
         .badge { font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: 700; margin: 2px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* Live Red Badge */
+        .live-badge { background: #ef4444; color: white; animation: live-pulse-red 1s infinite; font-weight: 900; border: 1px solid rgba(255,255,255,0.3); }
+        @keyframes live-pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+
+        /* Live Pulse Indicator (Green) */
+        .sync-pulse { width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; animation: sync-glow 1.5s infinite; }
+        @keyframes sync-glow { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+
         .ICC-Men { background: #0c4a6e; color: white; }
         .ICC-Women { background: #831843; color: white; }
         .Men-T20 { background: #4338ca; color: white; }
@@ -116,7 +129,6 @@
         .Football { background: #15803d; color: white; }
         .abandoned-badge { background: #ef4444; color: white; animation: pulse-attack 2s infinite; }
         
-        /* New AI Insight Badge */
         .ai-insight-badge { background: #f8fafc; border: 1px solid #e2e8f0; color: #64748b; font-size: 8px; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-right: 5px; vertical-align: middle; }
 
         .poya-closed-badge {
@@ -148,7 +160,17 @@
         .dot-alert { height: 8px; width: 8px; background-color: #b45309; border-radius: 50%; display: inline-block; animation: blink 0.8s infinite; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Modern Attack Multi-Select Styling */
+        /* Tactile Maximalism "Skins" for Buttons */
+        .btn-skin { 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.1));
+            box-shadow: 4px 4px 8px rgba(0,0,0,0.1), -4px -4px 8px rgba(255,255,255,0.7);
+        }
+        .btn-skin:active { transform: scale(0.92); box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2); }
+        .btn-excel { border: 1px solid #059669; }
+        .btn-pdf { border: 1px solid #e11d48; }
+        .btn-txt { border: 1px solid #475569; }
+
         select, input { background: #ffffff !important; color: #1e293b !important; border: 1px solid #e2e8f0 !important; transition: all 0.3s; }
         
         select[multiple] { 
@@ -176,10 +198,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             font-weight: 800;
         }
-
-        select[multiple] option:hover {
-            background-color: #f8fafc;
-        }
         
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
@@ -202,7 +220,7 @@
     <div id="luxury-loader">
         <div class="loader-content">
             <h3 class="loader-brand">Leisure Sports Holdings </h3>
-            <p class="loader-sub">Annual Events Schedule 2026</p>
+            <p class="loader-sub">The 2026 Events Vision</p>
             <div class="loader-bar-container">
                 <div class="loader-bar-progress"></div>
             </div>
@@ -221,7 +239,7 @@
             <div class="lg:col-span-2 bg-slate-900 rounded-3xl p-6 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 text-white border-b-4 border-amber-600">
                 <div class="w-full">
                     <div class="flex items-center gap-3 mb-2">
-                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
+                        <span class="sync-pulse"></span>
                         <p class="text-[10px] uppercase tracking-widest text-emerald-400 font-bold">Today’s Active Events</p>
                     </div>
                     <div id="today-events-list" class="flex flex-wrap gap-2"></div>
@@ -270,9 +288,9 @@
                     <h2 id="annual-total" class="text-2xl md:text-3xl font-black text-slate-900">0</h2>
                 </div>
                 <div class="flex gap-2 flex-grow sm:flex-grow-0">
-                    <button onclick="exportExcel()" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-3 rounded-xl text-[10px] font-bold shadow-md transition-all active:scale-95">EXCEL</button>
-                    <button onclick="exportPDF()" class="flex-1 bg-rose-700 hover:bg-rose-800 text-white px-4 py-3 rounded-xl text-[10px] font-bold shadow-md transition-all active:scale-95">PDF</button>
-                    <button onclick="exportTXT()" class="flex-1 bg-slate-700 hover:bg-slate-800 text-white px-4 py-3 rounded-xl text-[10px] font-bold shadow-md transition-all active:scale-95">TXT</button>
+                    <button onclick="exportExcel()" class="btn-skin btn-excel flex-1 bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-3 rounded-xl text-[10px] font-bold shadow-md">EXCEL</button>
+                    <button onclick="exportPDF()" class="btn-skin btn-pdf flex-1 bg-rose-700 hover:bg-rose-800 text-white px-4 py-3 rounded-xl text-[10px] font-bold shadow-md">PDF</button>
+                    <button onclick="exportTXT()" class="btn-skin btn-txt flex-1 bg-slate-700 hover:bg-slate-800 text-white px-4 py-3 rounded-xl text-[10px] font-bold shadow-md">TXT</button>
                 </div>
             </div>
         </div>
@@ -368,15 +386,14 @@
                     loader.classList.add('loader-hidden');
                 }, 2000);
 
-                // Combined Mouse and Touch Multi-Select Toggle
+                // ENHANCED MULTI-SELECT: Smart Toggle Logic
                 const multiSelects = document.querySelectorAll('select[multiple]');
                 multiSelects.forEach(select => {
-                    select.addEventListener('pointerdown', function(e) {
+                    select.addEventListener('mousedown', function(e) {
+                        e.preventDefault();
                         const option = e.target;
                         if (option.tagName === 'OPTION') {
-                            e.preventDefault(); // Prevents native mobile UI and mouse drag
                             option.selected = !option.selected;
-                            this.focus();
                             const event = new Event('change');
                             this.dispatchEvent(event);
                         }
@@ -449,7 +466,7 @@
                 const eventContainer = document.getElementById('today-events-list');
                 if(todayEvents.length > 0) {
                     eventContainer.innerHTML = todayEvents.map(e => {
-                        const statusTag = e.status === 'abandoned' ? '<span class="badge abandoned-badge">ABANDONED</span>' : '';
+                        const statusTag = e.status === 'abandoned' ? '<span class="badge abandoned-badge">ABANDONED</span>' : '<span class="badge live-badge">LIVE</span>';
                         return `<span class="badge ${e.cat}"><span class="ai-insight-badge">${e.cat}</span>${e.name}</span>${statusTag}`;
                     }).join('');
                 } else {
@@ -585,8 +602,9 @@
                                 <td class="p-4 md:p-6">
                                     ${todayEvents.map(e => {
                                         const badgeClass = e.status === 'abandoned' ? 'abandoned-badge' : e.cat;
-                                        const statusText = e.status === 'abandoned' ? ' [NOT HELD]' : '';
-                                        return `<span class="badge ${badgeClass}"><span class="ai-insight-badge">${e.cat}</span>${e.name}${statusText}</span>`;
+                                        const statusText = e.status === 'abandoned' ? ' [NOT HELD]' : (isToday ? ' [LIVE]' : '');
+                                        const activeBadge = (isToday && e.status !== 'abandoned') ? 'live-badge' : badgeClass;
+                                        return `<span class="badge ${activeBadge}"><span class="ai-insight-badge">${e.cat}</span>${e.name}${statusText}</span>`;
                                     }).join('')}
                                 </td>
                                 <td class="p-4 md:p-6">${isHigh && !isPoya && !hasAbandoned ? '<div class="crowd-attack"><span class="dot-alert"></span> High crowd</div>' : ''}</td>
@@ -606,12 +624,13 @@
                 statContainer.innerHTML = '';
                 monthlyCounts.forEach((val, i) => { 
                     statContainer.innerHTML += `
-                        <button onclick="filterByMonth(${i})" class="bg-white p-2 md:p-3 rounded-xl md:rounded-2xl text-center border shadow-sm hover:border-amber-500 transition-all active:scale-90">
+                        <button onclick="filterByMonth(${i})" class="btn-skin bg-white p-2 md:p-3 rounded-xl md:rounded-2xl text-center border shadow-sm hover:border-amber-500 transition-all">
                             <p class="text-[8px] md:text-[9px] text-amber-700 font-bold mb-1">${months[i]}</p>
                             <p class="text-sm md:text-lg font-black text-slate-900">${val}</p>
                         </button>`; 
                 });
 
+                // SCROLLYTELLING: Auto-center on Today
                 setTimeout(() => {
                     const tr = document.getElementById('active-today-row');
                     if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -654,10 +673,13 @@
             updateCountdown();
             renderMatrix();
             
+            // AUTO-REFRESH: Update every 60 seconds (60000ms)
             setInterval(() => { 
                 syncTodayDashboard(); 
+                updateCountdown();
                 renderMatrix(); 
-            }, 3600000);
+                console.log("Real-time Refresh Executed");
+            }, 60000);
         })();
     </script>
 </body>
