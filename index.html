@@ -157,7 +157,7 @@
             border-radius: 15px !important;
             outline: none;
             border: 2px solid #f1f5f9 !important;
-            -webkit-appearance: none; /* Mobile consistency fix */
+            -webkit-appearance: none; /* iOS specific fix */
         }
 
         select[multiple] option {
@@ -190,8 +190,8 @@
             .p-4 { padding: 1rem; }
             th, td { padding: 0.75rem !important; font-size: 10px !important; }
             .loader-brand { font-size: 2.5rem; }
-            /* Better visibility on mobile for selection boxes */
-            select[multiple] { height: 140px; }
+            /* Better visibility on mobile */
+            select[multiple] { height: 140px; } 
         }
     </style>
     <script>
@@ -371,7 +371,7 @@
                     loader.classList.add('loader-hidden');
                 }, 2000);
 
-                // FIXED: Multi-Touch Support for Mobile selection
+                // FIXED: Support for Mobile Touch Selection (iPhone 8 Plus)
                 const multiSelects = document.querySelectorAll('select[multiple]');
                 multiSelects.forEach(select => {
                     const toggleOption = function(e) {
@@ -379,45 +379,27 @@
                         const option = e.target;
                         if (option.tagName === 'OPTION') {
                             option.selected = !option.selected;
+                            // Trigger the change event for filtering
                             const event = new Event('change', { bubbles: true });
                             select.dispatchEvent(event);
                         }
                     };
 
-                    // Handle both Desktop clicks and Mobile taps
+                    // Standard click for desktop
                     select.addEventListener('mousedown', toggleOption);
+                    // Touchstart for mobile browsers
                     select.addEventListener('touchstart', toggleOption, { passive: false });
                 });
             });
 
             const _0xData = [
-                 { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11'},
-                { cat: 'ICC-Men', name: 'New Zealand tour of India', start: '2026-01-11', end: '2026-01-31'},
-                { cat: 'ICC-Men', name: 'England tour of Sri Lanka', start: '2026-01-22', end: '2026-02-03'},
-                { cat: 'ICC-Men', name: 'West Indies tour of South Africa', start: '2026-01-27', end: '2026-02-06' },
-                { cat: 'ICC-Men', name: 'Australia tour of Pakistan', start: '2026-01-29', end: '2026-02-01' },
-                { cat: 'ICC-Men', name: "ICC Men's T20 World Cup 2026", start: '2026-02-07', end: '2026-03-08' },
-                { cat: 'ICC-Men', name: 'South Africa tour of New Zealand', start: '2026-03-15', end: '2026-03-25'},
-                { cat: 'ICC-Men', name: 'New Zealand tour of England', start: '2026-06-04', end: '2026-06-29' },
-                { cat: 'ICC-Men', name: 'India tour of England', start: '2026-07-01', end: '2026-07-19' },
-                { cat: 'ICC-Men', name: 'Pakistan tour of England', start: '2026-08-19', end: '2026-09-13' },
-                { cat: 'ICC-Men', name: 'Sri Lanka tour of England', start: '2026-09-15', end: '2026-09-27' },
+                { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11'},
+                { cat: 'ICC-Men', name: 'New Zealand tour of India', start: '2026-01-11', end: '2026-01-31',status: 'abandoned'},
                 { cat: 'ICC-Women', name: 'Pakistan (W) tour of South Africa', start: '2026-02-10', end: '2026-03-01'},
                 { cat: 'ICC-Women', name: 'India (W) tour of Australia', start: '2026-02-15', end: '2026-03-09' },
-                { cat: 'ICC-Women', name: 'Zimbabwe (W) tour of New Zealand', start: '2026-02-25', end: '2026-03-11' },
-                { cat: 'ICC-Women', name: 'New Zealand (W) tour of England', start: '2026-05-10', end: '2026-05-25' },
-                { cat: 'ICC-Women', name: 'India (W) tour of England', start: '2026-05-28', end: '2026-09-06' },
-                { cat: 'ICC-Women', name: 'Ireland (W) tour of England', start: '2026-09-01', end: '2026-09-06' },
                 { cat: 'Men-T20', name: 'India IPL', start: '2026-03-22', end: '2026-06-01'},
                 { cat: 'Men-T20', name: 'Australia BBL', start: '2025-12-14', end: '2026-01-25' },
                 { cat: 'Men-T20', name: 'England Vitality Blast', start: '2026-05-22', end: '2026-07-18' },
-                { cat: 'Men-T20', name: 'New Zealand Super Smash', start: '2025-12-26', end: '2026-01-31' },
-                { cat: 'Men-T20', name: 'South Africa SA20', start: '2025-12-26', end: '2026-01-25' },
-                { cat: 'Men-T20', name: 'West Indies CPL', start: '2026-08-01', end: '2026-10-01' },
-                { cat: 'Men-T20', name: 'Pakistan PSL', start: '2026-04-11', end: '2026-05-18' },
-                { cat: 'Men-T20', name: 'Sri Lanka LPL', start: '2026-07-08', end: '2026-08-08' },
-                { cat: 'Men-T20', name: 'Bangladesh BPL', start: '2025-12-26', end: '2026-01-23' },
-                { cat: 'Men-T20', name: 'England Men Hundred', start: '2026-08-01', end: '2026-08-31' },
                 { cat: 'Women-T20', name: 'India IPL (W)', start: '2026-01-09', end: '2026-02-05' },
                 { cat: 'Women-T20', name: 'England Women Hundred', start: '2026-08-01', end: '2026-08-31' },
                 { cat: 'Football', name: 'World Cup Qualifiers Showcase', start: '2026-08-01', end: '2026-08-31' },
