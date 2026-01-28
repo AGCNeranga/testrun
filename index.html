@@ -116,7 +116,6 @@
         .Football { background: #15803d; color: white; }
         .abandoned-badge { background: #ef4444; color: white; animation: pulse-attack 2s infinite; }
         
-        /* New AI Insight Badge */
         .ai-insight-badge { background: #f8fafc; border: 1px solid #e2e8f0; color: #64748b; font-size: 8px; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-right: 5px; vertical-align: middle; }
 
         .poya-closed-badge {
@@ -148,7 +147,6 @@
         .dot-alert { height: 8px; width: 8px; background-color: #b45309; border-radius: 50%; display: inline-block; animation: blink 0.8s infinite; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Modern Attack Multi-Select Styling */
         select, input { background: #ffffff !important; color: #1e293b !important; border: 1px solid #e2e8f0 !important; transition: all 0.3s; }
         
         select[multiple] { 
@@ -157,6 +155,7 @@
             border-radius: 15px !important;
             outline: none;
             border: 2px solid #f1f5f9 !important;
+            -webkit-appearance: none; /* Fix for iOS rendering */
         }
 
         select[multiple] option {
@@ -177,13 +176,6 @@
             font-weight: 800;
         }
 
-        select[multiple] option:hover {
-            background-color: #f8fafc;
-        }
-        
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
-        
         @media (max-width: 640px) {
             .vvip-title { font-size: 1.8rem; }
             .p-4 { padding: 1rem; }
@@ -191,11 +183,6 @@
             .loader-brand { font-size: 2.5rem; }
         }
     </style>
-    <script>
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 67 || e.keyCode == 74)) || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) return false;
-        };
-    </script>
 </head>
 <body class="p-2 md:p-6 lg:p-10">
 
@@ -210,7 +197,6 @@
     </div>
 
     <div class="w-full max-w-[1920px] mx-auto">
-        
         <div class="mb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="lg:col-span-1 bg-white border-l-8 border-amber-500 rounded-3xl p-6 shadow-xl flex flex-col justify-center">
                 <p class="text-[10px] uppercase tracking-[0.3em] text-amber-600 font-black mb-1">Sri Lanka </p>
@@ -236,55 +222,6 @@
             </div>
         </div>
 
-        <div id="countdown-banner" class="mb-6 bg-slate-900 text-white p-4 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 shadow-2xl border-b-4 border-amber-600">
-            <div>
-                <p class="text-[10px] uppercase tracking-[0.3em] text-amber-500 font-bold">Next Major Event</p>
-                <h3 id="next-event-name" class="text-xl font-black italic">Loading Schedule...</h3>
-            </div>
-            <div class="flex gap-4 text-center">
-                <div><span id="cd-days" class="text-2xl font-black block">00</span><span class="text-[8px] uppercase opacity-60">Days</span></div>
-                <div class="text-2xl font-black opacity-30">:</div>
-                <div><span id="cd-hours" class="text-2xl font-black block">00</span><span class="text-[8px] uppercase opacity-60">Hrs</span></div>
-                <div class="text-2xl font-black opacity-30">:</div>
-                <div><span id="cd-min" class="text-2xl font-black block">00</span><span class="text-[8px] uppercase opacity-60">Min</span></div>
-            </div>
-        </div>
-
-        <div class="flex flex-col xl:flex-row justify-between items-start xl:items-end gap-6 mb-8 pb-8 border-b-2 border-slate-100">
-            <div class="w-full xl:w-auto text-center xl:text-left">
-                <h3 class="text-3xl md:text-5xl font-black text-slate-900 vvip-title tracking-tight italic">Annual Events Plan <span class="text-amber-600 not-italic">2026</span></h3>
-                <p class="text-slate-500 text-[10px] md:text-xs tracking-[0.4em] uppercase mt-2 font-bold">Leisure Sports Events Track</p>
-            </div>
-            
-            <div class="flex flex-wrap items-center justify-center xl:justify-end gap-3 w-full xl:w-auto">
-                <div class="glass-light p-3 md:p-4 rounded-2xl text-center min-w-[100px] md:min-w-[140px] shadow-sm">
-                    <p class="text-[9px] text-blue-700 font-extrabold uppercase tracking-widest">Events Covered</p>
-                    <h2 id="to-date-total" class="text-2xl md:text-3xl font-black text-slate-900">0</h2>
-                </div>
-                <div class="glass-light p-3 md:p-4 rounded-2xl text-center min-w-[100px] md:min-w-[140px] shadow-sm border-l-4 border-rose-500">
-                    <p class="text-[9px] text-rose-700 font-extrabold uppercase tracking-widest">Abandoned Events</p>
-                    <h2 id="abandoned-total" class="text-2xl md:text-3xl font-black text-slate-900">0</h2>
-                </div>
-                <div class="glass-light p-3 md:p-4 rounded-2xl text-center min-w-[100px] md:min-w-[140px] shadow-sm">
-                    <p class="text-[9px] text-amber-700 font-extrabold uppercase tracking-widest">All Events 2026</p>
-                    <h2 id="annual-total" class="text-2xl md:text-3xl font-black text-slate-900">0</h2>
-                </div>
-                <div class="flex gap-2 flex-grow sm:flex-grow-0">
-                    <button onclick="exportExcel()" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-3 rounded-xl text-[10px] font-bold shadow-md transition-all active:scale-95">EXCEL</button>
-                    <button onclick="exportPDF()" class="flex-1 bg-rose-700 hover:bg-rose-800 text-white px-4 py-3 rounded-xl text-[10px] font-bold shadow-md transition-all active:scale-95">PDF</button>
-                    <button onclick="exportTXT()" class="flex-1 bg-slate-700 hover:bg-slate-800 text-white px-4 py-3 rounded-xl text-[10px] font-bold shadow-md transition-all active:scale-95">TXT</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="mb-8">
-            <div class="flex justify-between items-end mb-4">
-                <h3 class="text-[10px] font-black text-amber-800 uppercase tracking-[0.2em] ml-1">Monthly All Events Total </h3>
-                <button onclick="resetFilters()" class="text-[9px] font-bold text-blue-600 hover:underline">Show All Year</button>
-            </div>
-            <div id="monthly-stats" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-2 md:gap-3"></div>
-        </div>
-
         <div class="glass-light p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] mb-8 shadow-xl">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6">
                 <div>
@@ -296,8 +233,8 @@
                     <input type="date" id="f-end-date" onchange="renderMatrix()" class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
                 </div>
                 <div>
-                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Event Main Title (Multi)</label>
-                    <select id="f-cat" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
+                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Event Main Title</label>
+                    <select id="f-cat" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm">
                         <option value="ICC-Men">ICC-Men</option>
                         <option value="ICC-Women">ICC-Women</option>
                         <option value="Men-T20">Men-T20</option>
@@ -306,8 +243,8 @@
                     </select>
                 </div>
                 <div>
-                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Day Selection (Multi)</label>
-                    <select id="f-day" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
+                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Day Selection</label>
+                    <select id="f-day" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm">
                         <option value="Monday">Monday</option>
                         <option value="Tuesday">Tuesday</option>
                         <option value="Wednesday">Wednesday</option>
@@ -318,8 +255,8 @@
                     </select>
                 </div>
                 <div>
-                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Branch Program (Multi)</label>
-                    <select id="f-prog" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
+                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Branch Program</label>
+                    <select id="f-prog" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm">
                         <option value="Open Mic">Open Mic</option>
                         <option value="Just press play">Just press play</option>
                         <option value="quiz night">Quiz Night</option>
@@ -329,29 +266,27 @@
                     </select>
                 </div>
                 <div>
-                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Crowd Alert (Multi)</label>
-                    <select id="f-crowd" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm cursor-pointer">
+                    <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Crowd Alert</label>
+                    <select id="f-crowd" multiple onchange="renderMatrix()" class="w-full rounded-xl text-xs font-semibold shadow-sm">
                         <option value="HIGH">High Crowd</option>
                         <option value="NORMAL">Standard Crowd</option>
                     </select>
                 </div>
             </div>
             <div class="mt-4">
-                <label class="text-[9px] uppercase font-bold text-slate-400 mb-2 block ml-1">Search Events</label>
-                <input type="text" id="f-search" onkeyup="renderMatrix()" placeholder="Meeting name..." class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm">
+                <input type="text" id="f-search" onkeyup="renderMatrix()" placeholder="Search event name..." class="w-full p-3 md:p-4 rounded-xl text-xs font-semibold shadow-sm">
             </div>
-            <p class="text-[8px] text-slate-400 mt-2 font-bold">* Quick Selection: Click items to toggle on/off instantly.</p>
         </div>
 
         <div class="bg-white rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl border border-slate-100">
-            <div class="max-h-[700px] overflow-auto scroll-smooth" id="scroll-container">
+            <div class="max-h-[700px] overflow-auto" id="scroll-container">
                 <table class="w-full text-left border-collapse" id="matrix-table">
                     <thead class="sticky top-0 bg-white/95 backdrop-blur z-10 shadow-md">
                         <tr class="text-[9px] md:text-[11px] text-slate-400 uppercase tracking-widest font-extrabold">
-                            <th class="p-4 md:p-6 border-b border-slate-50">Date / Day</th>
-                            <th class="p-4 md:p-6 border-b border-slate-50 text-amber-700 italic">Branch Program</th>
-                            <th class="p-4 md:p-6 border-b border-slate-50">Events</th>
-                            <th class="p-4 md:p-6 border-b border-slate-50">Crowd Alert</th>
+                            <th class="p-4 md:p-6 border-b">Date / Day</th>
+                            <th class="p-4 md:p-6 border-b">Program</th>
+                            <th class="p-4 md:p-6 border-b">Events</th>
+                            <th class="p-4 md:p-6 border-b">Alert</th>
                         </tr>
                     </thead>
                     <tbody id="matrix-body" class="divide-y divide-slate-50"></tbody>
@@ -366,65 +301,37 @@
                 setTimeout(() => {
                     const loader = document.getElementById('luxury-loader');
                     if(loader) loader.classList.add('loader-hidden');
-                }, 2000);
+                }, 1500);
 
-                // CROSS-DEVICE COMPATIBLE MULTI-SELECT HANDLER
+                // FIXED MOBILE INTERACTION LOGIC
                 const multiSelects = document.querySelectorAll('select[multiple]');
                 
-                const handleSelection = function(e) {
+                const handleMultiSelect = function(e) {
                     e.preventDefault();
                     const option = e.target;
                     if (option.tagName === 'OPTION') {
                         option.selected = !option.selected;
-                        // Trigger change on parent so renderMatrix() fires
-                        const event = new Event('change', { bubbles: true });
-                        option.parentElement.dispatchEvent(event);
+                        // Manually trigger the matrix update
+                        renderMatrix();
                     }
                 };
 
                 multiSelects.forEach(select => {
-                    // Desktop Support
-                    select.addEventListener('mousedown', handleSelection);
-                    // Mobile Touch Support
-                    select.addEventListener('touchstart', function(e) {
-                        if(e.target.tagName === 'OPTION') {
-                            handleSelection(e);
-                        }
-                    }, { passive: false });
+                    // For Desktop
+                    select.addEventListener('mousedown', handleMultiSelect);
+                    // For Mobile
+                    select.addEventListener('touchstart', handleMultiSelect, {passive: false});
                 });
             });
 
             const _0xData = [
-                 { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11'},
-                { cat: 'ICC-Men', name: 'New Zealand tour of India', start: '2026-01-11', end: '2026-01-31'},
-                { cat: 'ICC-Men', name: 'England tour of Sri Lanka', start: '2026-01-22', end: '2026-02-03'},
-                { cat: 'ICC-Men', name: 'West Indies tour of South Africa', start: '2026-01-27', end: '2026-02-06' },
-                { cat: 'ICC-Men', name: 'Australia tour of Pakistan', start: '2026-01-29', end: '2026-02-01' },
-                { cat: 'ICC-Men', name: "ICC Men's T20 World Cup 2026", start: '2026-02-07', end: '2026-03-08' },
-                { cat: 'ICC-Men', name: 'South Africa tour of New Zealand', start: '2026-03-15', end: '2026-03-25'},
-                { cat: 'ICC-Men', name: 'New Zealand tour of England', start: '2026-06-04', end: '2026-06-29' },
-                { cat: 'ICC-Men', name: 'India tour of England', start: '2026-07-01', end: '2026-07-19' },
-                { cat: 'ICC-Men', name: 'Pakistan tour of England', start: '2026-08-19', end: '2026-09-13' },
-                { cat: 'ICC-Men', name: 'Sri Lanka tour of England', start: '2026-09-15', end: '2026-09-27' },
+                { cat: 'ICC-Men', name: 'Pakistan tour of Sri Lanka', start: '2026-01-07', end: '2026-01-11'},
+                { cat: 'ICC-Men', name: 'New Zealand tour of India', start: '2026-01-11', end: '2026-01-31',status: 'abandoned'},
                 { cat: 'ICC-Women', name: 'Pakistan (W) tour of South Africa', start: '2026-02-10', end: '2026-03-01'},
                 { cat: 'ICC-Women', name: 'India (W) tour of Australia', start: '2026-02-15', end: '2026-03-09' },
-                { cat: 'ICC-Women', name: 'Zimbabwe (W) tour of New Zealand', start: '2026-02-25', end: '2026-03-11' },
-                { cat: 'ICC-Women', name: 'New Zealand (W) tour of England', start: '2026-05-10', end: '2026-05-25' },
-                { cat: 'ICC-Women', name: 'India (W) tour of England', start: '2026-05-28', end: '2026-09-06' },
-                { cat: 'ICC-Women', name: 'Ireland (W) tour of England', start: '2026-09-01', end: '2026-09-06' },
                 { cat: 'Men-T20', name: 'India IPL', start: '2026-03-22', end: '2026-06-01'},
                 { cat: 'Men-T20', name: 'Australia BBL', start: '2025-12-14', end: '2026-01-25' },
-                { cat: 'Men-T20', name: 'England Vitality Blast', start: '2026-05-22', end: '2026-07-18' },
-                { cat: 'Men-T20', name: 'New Zealand Super Smash', start: '2025-12-26', end: '2026-01-31' },
-                { cat: 'Men-T20', name: 'South Africa SA20', start: '2025-12-26', end: '2026-01-25' },
-                { cat: 'Men-T20', name: 'West Indies CPL', start: '2026-08-01', end: '2026-10-01' },
-                { cat: 'Men-T20', name: 'Pakistan PSL', start: '2026-04-11', end: '2026-05-18' },
-                { cat: 'Men-T20', name: 'Sri Lanka LPL', start: '2026-07-08', end: '2026-08-08' },
-                { cat: 'Men-T20', name: 'Bangladesh BPL', start: '2025-12-26', end: '2026-01-23' },
-                { cat: 'Men-T20', name: 'England Men Hundred', start: '2026-08-01', end: '2026-08-31' },
                 { cat: 'Women-T20', name: 'India IPL (W)', start: '2026-01-09', end: '2026-02-05' },
-                { cat: 'Women-T20', name: 'England Women Hundred', start: '2026-08-01', end: '2026-08-31' },
-                { cat: 'Football', name: 'World Cup Qualifiers Showcase', start: '2026-08-01', end: '2026-08-31' },
                 { cat: 'Football', name: 'Oceania Football Tournament', start: '2026-02-01', end: '2026-02-28' }
             ];
 
@@ -437,11 +344,7 @@
                 const year = slTime.getFullYear();
                 const month = String(slTime.getMonth() + 1).padStart(2, '0');
                 const day = String(slTime.getDate()).padStart(2, '0');
-                return {
-                    dateString: `${year}-${month}-${day}`,
-                    object: slTime,
-                    dayName: slTime.toLocaleDateString('en-US', { weekday: 'long' })
-                };
+                return { dateString: `${year}-${month}-${day}`, object: slTime, dayName: slTime.toLocaleDateString('en-US', { weekday: 'long' }) };
             }
 
             function syncTodayDashboard() {
@@ -449,99 +352,30 @@
                 const isPoya = poyas.includes(sl.dateString);
                 const isHigh = ["Thursday", "Friday", "Saturday", "Sunday"].includes(sl.dayName);
                 
-                const dateEl = document.getElementById('today-date-display');
-                const dayEl = document.getElementById('today-day-display');
-                if(dateEl) dateEl.innerText = sl.object.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                if(dayEl) dayEl.innerText = sl.dayName;
-                
-                const progDisp = isPoya ? '<span class="poya-closed-badge">POYA DAY (CLOSED)</span>' : branchSpecials[sl.dayName];
-                const progEl = document.getElementById('today-prog-display');
-                if(progEl) progEl.innerHTML = progDisp;
+                document.getElementById('today-date-display').innerText = sl.object.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                document.getElementById('today-day-display').innerText = sl.dayName;
+                document.getElementById('today-prog-display').innerHTML = isPoya ? '<span class="poya-closed-badge">POYA CLOSED</span>' : branchSpecials[sl.dayName];
 
                 const todayEvents = _0xData.filter(e => sl.dateString >= e.start && sl.dateString <= e.end);
                 const eventContainer = document.getElementById('today-events-list');
-                if(eventContainer) {
-                    if(todayEvents.length > 0) {
-                        eventContainer.innerHTML = todayEvents.map(e => {
-                            const statusTag = e.status === 'abandoned' ? '<span class="badge abandoned-badge">ABANDONED</span>' : '';
-                            return `<span class="badge ${e.cat}"><span class="ai-insight-badge">${e.cat}</span>${e.name}</span>${statusTag}`;
-                        }).join('');
-                    } else {
-                        eventContainer.innerHTML = '<span class="text-slate-500 text-xs italic">No major tournaments scheduled for today.</span>';
-                    }
-                }
-
-                const crowdContainer = document.getElementById('today-crowd-stat');
-                if(crowdContainer) {
-                    if(isHigh && !isPoya) {
-                        crowdContainer.innerHTML = '<p class="text-[9px] uppercase opacity-50 mb-1">Status</p><div class="crowd-attack"><span class="dot-alert"></span> High crowd</div>';
-                    } else {
-                        crowdContainer.innerHTML = '<p class="text-[9px] uppercase opacity-50 mb-1">Status</p><p class="text-xs font-bold text-slate-400">Normal</p>';
-                    }
-                }
+                eventContainer.innerHTML = todayEvents.length > 0 ? 
+                    todayEvents.map(e => `<span class="badge ${e.cat}">${e.name}</span>`).join('') : 
+                    '<span class="text-slate-500 text-xs italic">No major events today.</span>';
             }
 
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const futureEvents = _0xData
-                    .map(e => ({ ...e, startTime: new Date(e.start).getTime() }))
-                    .filter(e => e.startTime > now && e.status !== 'abandoned')
-                    .sort((a, b) => a.startTime - b.startTime);
-
-                if (futureEvents.length > 0) {
-                    const next = futureEvents[0];
-                    const diff = next.startTime - now;
-                    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    const nextEl = document.getElementById('next-event-name');
-                    if(nextEl) nextEl.innerText = next.name;
-                    if(document.getElementById('cd-days')) document.getElementById('cd-days').innerText = d.toString().padStart(2, '0');
-                    if(document.getElementById('cd-hours')) document.getElementById('cd-hours').innerText = h.toString().padStart(2, '0');
-                    if(document.getElementById('cd-min')) document.getElementById('cd-min').innerText = m.toString().padStart(2, '0');
-                }
+            function getSelectValues(id) {
+                const select = document.getElementById(id);
+                return Array.from(select.options).filter(opt => opt.selected).map(opt => opt.value);
             }
-
-            function getSelectValues(select) {
-                var result = [];
-                var options = select && select.options;
-                var opt;
-                for (var i=0, iLen=options.length; i<iLen; i++) {
-                    opt = options[i];
-                    if (opt.selected) {
-                        result.push(opt.value || opt.text);
-                    }
-                }
-                return result;
-            }
-
-            window.filterByMonth = function(monthIdx) {
-                const year = 2026;
-                const firstDay = new Date(year, monthIdx, 1).toISOString().split('T')[0];
-                const lastDay = new Date(year, monthIdx + 1, 0).toISOString().split('T')[0];
-                document.getElementById('f-start-date').value = firstDay;
-                document.getElementById('f-end-date').value = lastDay;
-                renderMatrix();
-            };
-
-            window.resetFilters = function() {
-                document.getElementById('f-start-date').value = '';
-                document.getElementById('f-end-date').value = '';
-                Array.from(document.querySelectorAll('select')).forEach(s => {
-                    for(let i=0; i<s.options.length; i++) s.options[i].selected = false;
-                });
-                document.getElementById('f-search').value = '';
-                renderMatrix();
-            };
 
             window.renderMatrix = function() {
                 const body = document.getElementById('matrix-body');
                 if(!body) return;
                 
-                const fCats = getSelectValues(document.getElementById('f-cat'));
-                const fDays = getSelectValues(document.getElementById('f-day'));
-                const fProgs = getSelectValues(document.getElementById('f-prog'));
-                const fCrowds = getSelectValues(document.getElementById('f-crowd'));
+                const fCats = getSelectValues('f-cat');
+                const fDays = getSelectValues('f-day');
+                const fProgs = getSelectValues('f-prog');
+                const fCrowds = getSelectValues('f-crowd');
                 const fSearch = document.getElementById('f-search').value.toLowerCase();
                 const fStart = document.getElementById('f-start-date').value;
                 const fEnd = document.getElementById('f-end-date').value;
@@ -549,139 +383,38 @@
                 body.innerHTML = '';
                 let date = new Date("2026-01-01");
                 const sl = getSLTimeInfo();
-                const slTodayStr = sl.dateString;
-                const slTodayObj = new Date(slTodayStr);
-
-                let annualCount = 0;
-                let toDateCount = 0;
-                let abandonedCount = 0;
-                let monthlyCounts = new Array(12).fill(0);
 
                 for(let i=0; i<365; i++) {
                     let dStr = date.toISOString().split('T')[0];
                     let dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
                     let isPoya = poyas.includes(dStr);
-                    let isHigh = ["Thursday", "Friday", "Saturday", "Sunday"].includes(dayName);
-                    let isToday = (dStr === slTodayStr);
                     let prog = isPoya ? "CLOSED" : branchSpecials[dayName];
+                    let isHigh = ["Thursday", "Friday", "Saturday", "Sunday"].includes(dayName);
                     
-                    let todayEvents = _0xData.filter(e => {
-                        const isInCategory = (fCats.length === 0 || fCats.includes(e.cat));
-                        return isInCategory && dStr >= e.start && dStr <= e.end;
-                    });
+                    let matches = _0xData.filter(e => (fCats.length === 0 || fCats.includes(e.cat)) && dStr >= e.start && dStr <= e.end);
 
-                    let hasAbandoned = todayEvents.some(e => e.status === 'abandoned');
-                    let hasFootball = todayEvents.some(e => e.cat === 'Football');
+                    const withinDate = (!fStart || dStr >= fStart) && (!fEnd || dStr <= fEnd);
+                    const withinDay = fDays.length === 0 || fDays.includes(dayName);
+                    const withinProg = fProgs.length === 0 || fProgs.some(p => prog.includes(p));
+                    const withinCrowd = fCrowds.length === 0 || (fCrowds.includes("HIGH") && isHigh) || (fCrowds.includes("NORMAL") && !isHigh);
 
-                    let mIdx = date.getMonth();
-                    if(todayEvents.length > 0) { 
-                        monthlyCounts[mIdx]++; 
-                        if(date <= slTodayObj) { 
-                            if(hasAbandoned) { abandonedCount++; }
-                            else { toDateCount++; }
-                        }
-                    }
-
-                    const withinDateRange = (!fStart || dStr >= fStart) && (!fEnd || dStr <= fEnd);
-                    const withinDayFilter = fDays.length === 0 || fDays.includes(dayName);
-                    const withinProgFilter = fProgs.length === 0 || fProgs.some(p => prog.includes(p));
-                    const withinCrowdFilter = fCrowds.length === 0 || (fCrowds.includes("HIGH") && isHigh) || (fCrowds.includes("NORMAL") && !isHigh);
-
-                    if (withinDateRange && withinDayFilter && withinProgFilter && withinCrowdFilter && (fSearch === "" || todayEvents.some(e => e.name.toLowerCase().includes(fSearch)))) {
-                        if(todayEvents.length > 0) {
-                            annualCount++;
-                            let row = document.createElement('tr');
-                            
-                            let rowStyle = isToday ? 'today-highlight' : (hasAbandoned ? 'abandoned-row' : (hasFootball ? 'football-row' : (isPoya ? 'poya-day' : (isHigh ? 'high-crowd' : ''))));
-                            row.className = rowStyle;
-                            if(isToday) row.id = "active-today-row";
-                            
-                            row.innerHTML = `
-                                <td class="p-4 md:p-6 text-xs font-bold text-slate-800">
-                                    ${isToday ? '<span class="today-tag">TODAY</span><br>' : ''}
-                                    ${dStr}<br><span class="opacity-50 uppercase text-[9px] tracking-widest">${dayName}</span>
-                                </td>
-                                <td class="p-4 md:p-6 text-xs font-black uppercase italic text-amber-900">
-                                    ${isPoya ? '<span class="poya-closed-badge">POYA DAY</span>' : branchSpecials[dayName]}
-                                </td>
-                                <td class="p-4 md:p-6">
-                                    ${todayEvents.map(e => {
-                                        const badgeClass = e.status === 'abandoned' ? 'abandoned-badge' : e.cat;
-                                        const statusText = e.status === 'abandoned' ? ' [NOT HELD]' : '';
-                                        return `<span class="badge ${badgeClass}"><span class="ai-insight-badge">${e.cat}</span>${e.name}${statusText}</span>`;
-                                    }).join('')}
-                                </td>
-                                <td class="p-4 md:p-6">${isHigh && !isPoya && !hasAbandoned ? '<div class="crowd-attack"><span class="dot-alert"></span> High crowd</div>' : ''}</td>
-                            `;
-                            body.appendChild(row);
-                        }
+                    if (withinDate && withinDay && withinProg && withinCrowd && matches.length > 0 && (fSearch === "" || matches.some(e => e.name.toLowerCase().includes(fSearch)))) {
+                        let row = document.createElement('tr');
+                        row.className = dStr === sl.dateString ? 'today-highlight' : (isPoya ? 'poya-day' : (isHigh ? 'high-crowd' : ''));
+                        row.innerHTML = `
+                            <td class="p-4 text-xs font-bold">${dStr}<br><span class="opacity-50 text-[9px]">${dayName}</span></td>
+                            <td class="p-4 text-xs font-black italic">${prog}</td>
+                            <td class="p-4">${matches.map(e => `<span class="badge ${e.cat}">${e.name}</span>`).join('')}</td>
+                            <td class="p-4 text-[10px]">${isHigh && !isPoya ? 'High' : ''}</td>
+                        `;
+                        body.appendChild(row);
                     }
                     date.setDate(date.getDate() + 1);
                 }
-                
-                if(document.getElementById('annual-total')) document.getElementById('annual-total').innerText = annualCount;
-                if(document.getElementById('to-date-total')) document.getElementById('to-date-total').innerText = toDateCount;
-                if(document.getElementById('abandoned-total')) document.getElementById('abandoned-total').innerText = abandonedCount;
-                
-                const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-                const statContainer = document.getElementById('monthly-stats');
-                if(statContainer) {
-                    statContainer.innerHTML = '';
-                    monthlyCounts.forEach((val, i) => { 
-                        statContainer.innerHTML += `
-                            <button onclick="filterByMonth(${i})" class="bg-white p-2 md:p-3 rounded-xl md:rounded-2xl text-center border shadow-sm hover:border-amber-500 transition-all active:scale-90">
-                                <p class="text-[8px] md:text-[9px] text-amber-700 font-bold mb-1">${months[i]}</p>
-                                <p class="text-sm md:text-lg font-black text-slate-900">${val}</p>
-                            </button>`; 
-                    });
-                }
-
-                setTimeout(() => {
-                    const tr = document.getElementById('active-today-row');
-                    if(tr) tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 1000);
-            };
-
-            window.exportExcel = function() {
-                const ws = XLSX.utils.json_to_sheet(_0xData);
-                const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "Schedule_2026");
-                XLSX.writeFile(wb, "Yearly_Schedule_2026.xlsx");
-            };
-
-            window.exportTXT = function() {
-                let content = "YEARLY SCHEDULE OF EVENTS 2026\n==============================\n\n";
-                _0xData.forEach(e => content += `${e.start} to ${e.end}: ${e.name} (${e.cat}) ${e.status ? '['+e.status.toUpperCase()+']' : ''}\n`);
-                const blob = new Blob([content], { type: "text/plain" });
-                const link = document.createElement("a");
-                link.href = URL.createObjectURL(blob);
-                link.download = "Schedule_2026.txt";
-                link.click();
-            };
-
-            window.exportPDF = function() {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF('p', 'pt', 'a4');
-                doc.text("Yearly Schedule of Events 2026", 40, 40);
-                const tableData = _0xData.map(e => [e.start, e.end, e.name, e.cat, e.status || 'Active']);
-                doc.autoTable({
-                    head: [['Start Date', 'End Date', 'Event Name', 'Category', 'Status']],
-                    body: tableData,
-                    startY: 60,
-                    theme: 'grid',
-                    headStyles: { fillStyle: '#d4af37' }
-                });
-                doc.save("Schedule_2026.pdf");
             };
 
             syncTodayDashboard();
-            updateCountdown();
             renderMatrix();
-            
-            setInterval(() => { 
-                syncTodayDashboard(); 
-                renderMatrix(); 
-            }, 3600000);
         })();
     </script>
 </body>
