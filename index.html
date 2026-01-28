@@ -157,7 +157,6 @@
             border-radius: 15px !important;
             outline: none;
             border: 2px solid #f1f5f9 !important;
-            -webkit-appearance: none; /* Remove native appearance for cleaner mobile UI */
         }
 
         select[multiple] option {
@@ -190,7 +189,6 @@
             .p-4 { padding: 1rem; }
             th, td { padding: 0.75rem !important; font-size: 10px !important; }
             .loader-brand { font-size: 2.5rem; }
-            select[multiple] { height: 140px; } /* Slightly taller for easier touch */
         }
     </style>
     <script>
@@ -367,7 +365,7 @@
             window.addEventListener('load', function() {
                 setTimeout(() => {
                     const loader = document.getElementById('luxury-loader');
-                    loader.classList.add('loader-hidden');
+                    if(loader) loader.classList.add('loader-hidden');
                 }, 2000);
 
                 // CROSS-DEVICE COMPATIBLE MULTI-SELECT HANDLER
@@ -378,17 +376,17 @@
                     const option = e.target;
                     if (option.tagName === 'OPTION') {
                         option.selected = !option.selected;
+                        // Trigger change on parent so renderMatrix() fires
                         const event = new Event('change', { bubbles: true });
                         option.parentElement.dispatchEvent(event);
                     }
                 };
 
                 multiSelects.forEach(select => {
-                    // Desktop
+                    // Desktop Support
                     select.addEventListener('mousedown', handleSelection);
-                    // Mobile / Touch
+                    // Mobile Touch Support
                     select.addEventListener('touchstart', function(e) {
-                        // We check if the target is an option to allow scrolling the select box itself
                         if(e.target.tagName === 'OPTION') {
                             handleSelection(e);
                         }
@@ -496,8 +494,8 @@
                     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
                     const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    const nameEl = document.getElementById('next-event-name');
-                    if(nameEl) nameEl.innerText = next.name;
+                    const nextEl = document.getElementById('next-event-name');
+                    if(nextEl) nextEl.innerText = next.name;
                     if(document.getElementById('cd-days')) document.getElementById('cd-days').innerText = d.toString().padStart(2, '0');
                     if(document.getElementById('cd-hours')) document.getElementById('cd-hours').innerText = h.toString().padStart(2, '0');
                     if(document.getElementById('cd-min')) document.getElementById('cd-min').innerText = m.toString().padStart(2, '0');
